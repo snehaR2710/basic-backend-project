@@ -1,11 +1,11 @@
 const User = require("../models/userModel")
 
-exports.home = (req, res) => {
+const home = (req, res) => {
     res.send("Hello world!");
 }
 
 // data send in database
-exports.createUser = async (req, res) => {
+const createUser = async (req, res) => {
     // extract info
     try {
         const {name, email, password} = req.body
@@ -40,7 +40,7 @@ exports.createUser = async (req, res) => {
 }
 
 // to get data from database
-exports.getUsers = async (req, res) => {
+const getUsers = async (req, res) => {
     try {
         const users = await User.find({})
 
@@ -61,7 +61,7 @@ exports.getUsers = async (req, res) => {
 }
 
 // Edit users from database
-exports.editUsers = async (req, res) => {
+const editUsers = async (req, res) => {
     try {
         const user = await User.findByIdAndUpdate(req.params.id, req.body)
         res.status(200).json({
@@ -77,7 +77,7 @@ exports.editUsers = async (req, res) => {
 }
 
 // delete data from database
-exports.deleteUsers = async (req, res) => {
+const deleteUsers = async (req, res) => {
     try {
         /* we takes data from users two types 1-> through body and 2-> trough url
          If we data through body so we write -> req.body And if we geta data through
@@ -95,6 +95,13 @@ exports.deleteUsers = async (req, res) => {
             message: error.message
         })
     }
+}
+module.exports = {
+    home,
+    createUser,
+    getUsers,
+    editUsers,
+    deleteUsers
 }
 
 
